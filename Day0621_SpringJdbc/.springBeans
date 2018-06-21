@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/dao/applicationContext.xml</config>
 		<config>src/dao2/applicationContext.xml</config>
+		<config>src/dao3/applicationContext.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
