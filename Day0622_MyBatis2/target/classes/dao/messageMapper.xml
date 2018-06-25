@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.messageMapper">
+	<insert id="addMessage" parameterType="msg">
+		INSERT into message values(#{id}, #{password}, #{name}, #{message})
+	</insert>
+	<update id="updateMessage" parameterType="msg">
+		UPDATE message set id = #{id}, password = #{password}, name = #{name}, message = #{message}
+				 where id = #{id}
+	</update>
+	<delete id="deleteMessage" parameterType="int">
+		DELETE from message where id = #{id}
+	</delete>
+	<select id="selectOneMsg" parameterType="int" resultType="msg">
+		SELECT * from message where id = #{id}
+	</select>
+	<select id="selectAllMsg" resultType="msg">
+		SELECT * from message
+	</select>
+	
+	<!-- jdbcTemplate 에서는 rowMapper 사용
+		 mybatis 에서는 resultMap 사용
+	 -->
+	 
+	 <!-- 모델과 db의 컬럼이 틀릴 때  아래 방식으로 resulttype에 id를 넣어 매핑 할 수 있다. -->
+	 <resultMap type = "student" id = "studentMap">
+	 	<result property="s_Num" column = "snum"/>
+	 	<result property="s_Name" column = "sname"/>
+	 	<result property="s_Grade" column = "sgrade"/>
+	 </resultMap>
+</mapper>

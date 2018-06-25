@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--  DB 접속정보, Model Class 정보, Mapper File 위치정보(Mapping 정보) -->
+	<typeAliases> <!--  모델 정보 -->
+		<typeAlias type="model.Student" alias="student"/>
+	</typeAliases>
+	
+	<environments default="development"> 	<!--  DB접속정보 -->
+		<environment id="development">
+			<transactionManager type="MANAGED"/>
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+				<property name="username" value="kwangmin"/>
+				<property name="password" value="1"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>	<!-- Mapper 정보  -->
+		<mapper resource="dao/studentMapper.xml"/>
+	</mappers> 
+</configuration>
