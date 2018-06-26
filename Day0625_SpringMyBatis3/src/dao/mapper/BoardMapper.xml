@@ -3,25 +3,69 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "dao.BoardDao">
-	<insert id = "insertBoard" parameterType="map">
-		INSERT into board values(board_seq.nextval, #{TITLE}, #{NAME}, #{PASS}, #{EMAIL}, #{CONTENT}, 0, SYSDATE)
+<mapper namespace="dao.BoardDao">
+	<insert id="insertBoard" parameterType="map">
+		INSERT into board values(
+		board_seq.nextval,
+		<include refid="title" />,
+		<include refid="name"/>,
+		#{PASS},
+		#{EMAIL},
+		#{CONTENT},
+		0,
+		SYSDATE)
 	</insert>
-	
-	<update id = "updateBoard" parameterType="map">
-		UPDATE board set title = #{TITLE}, name = #{NAME}, pass = #{PASS}, email = #{EMAIL}, content = #{CONTENT}, readcount = #{READCOUNT}
-						where num = #{NUM}
+
+	<update id="updateBoard" parameterType="map">
+		UPDATE board set title =
+		#{TITLE}, name = #{NAME}, pass = #{PASS}, email = #{EMAIL}, content =
+		#{CONTENT}, readcount = #{READCOUNT}
+		where num = #{NUM}
 	</update>
-	
-	<delete id = "deleteBoard" parameterType="int">
-		DELETE from board where num = #{NUM}
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE from board where
+		num = #{NUM}
 	</delete>
-	
-	<select id = "selectOne" parameterType="int" resultType="map">
-		SELECT * from board where num = #{NUM}
+
+	<select id="selectOne" parameterType="int" resultType="map">
+		SELECT *
+		from board where num = #{NUM}
 	</select>
-	
-	<select id = "selectAll" resultType="map">
+
+	<select id="selectAll" resultType="map">
 		SELECT * from board
 	</select>
+
+	<select id="searchBoard" parameterType="map" resultType="map"> <!--  parameter로  keyword, type 두개가 들어온다 -->
+		SELECT * from board
+		where 1 = 0 
+		<if test = "TITLE != null"> or title LIKE '%${TITLE}%'</if>
+		<if test = "NAME != null"> or title LIKE '%${NAME}%'</if>
+		<if test = "CONTENT != null"> or title LIKE '%${CONTENT}'</if>
+		<if test = "type == 0"> or 1 = 1</if>
+	</select>
+	
+	<sql id="title">
+		<choose>
+			<when test="TITLE != null">
+				#{TITLE}
+			</when>
+			<otherwise>
+				'제목없음'
+			</otherwise>
+		</choose>
+	</sql>
+	<sql id="name">
+		<choose>
+			<when test="NAME != null">
+				#{NAME}
+			</when>
+			<otherwise>
+				'이름없음'
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- 동적쿼리 : 상황에 맞게 특정한 sql을 만들어 내는 기능 제공 -->
+	<!-- <sql>태그는 반복되는 sql을 따로 작성해서 불러 사용하기 위해 사용 -->
 </mapper>

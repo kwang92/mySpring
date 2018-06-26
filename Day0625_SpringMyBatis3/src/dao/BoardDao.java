@@ -9,4 +9,5 @@ public interface BoardDao {
 	public int deleteBoard(int num);
 	public Map<String, Object> selectOne(int num);
 	public List<Map<String, Object>> selectAll();
+	public List<Map<String, Object>> searchBoard(Map<String, Object> params);
 }
