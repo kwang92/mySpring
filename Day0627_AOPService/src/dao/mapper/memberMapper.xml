@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dao.MemberDao">
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO MEMBER VALUES(#{NUM}, #{GENDER}, #{NAME}, #{AGE})
+	</insert>
+	<update id="updateMember" parameterType="member">
+		UPDATE MEMBER SET NUM = #{NUM}, GENDER = #{GENDER}, NAME = #{NAME}, AGE = #{AGE}
+						WHERE NUM = #{NUM}
+	</update>
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM MEMBER WHERE NUM = #{NUM}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="member">
+		SELECT * FROM MEMBER WHERE NUM = #{NUM}
+	</select>
+	<select id="selectAll" resultType="member">
+		SELECT * FROM MEMBER
+	</select>
+</mapper>

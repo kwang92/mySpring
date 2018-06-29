@@ -1,5 +1,6 @@
 package aop2;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 public class MyAspect {
@@ -14,31 +15,33 @@ public class MyAspect {
 	 * 
 	 * 단, after-returning, after-throwing과 after는  실행순서의 연관성이 없으므로 순서의 개연성이 있는 프로그래밍을 하면 안된다.
 	 */
-	public void before() {
+	public void before(JoinPoint jp) {
 		// target 메소드 실행 전
-		System.out.println("지하철을 탑니다.");
+		System.out.println("Target : "+jp.getTarget());
 	}
-	public void after() {
+	public void after(JoinPoint jp) {
 		// target 메소드 실행 후
 		System.out.println("씻고 잠을 잡니다.");
 	}
-	public void afterReturning() {
+	public void afterReturning(JoinPoint jp, String msg) {	// JoinPoint, 반환 값
 		// target 메소드 정상 종료 후
+		System.out.println(msg);
 		System.out.println("계산을 합니다.");
 	}
-	public void afterThrowing() {
+	public void afterThrowing(JoinPoint jp,Throwable th) {
 		// target 메소드 비정상 종료 후
+		System.out.println(th.getMessage());
 		System.out.println("엄마한테 혼이 납니다.");
 	}
-	public void around(ProceedingJoinPoint jp){
-		// target 실행 전에 실행되고 target을 직접 호출해야하므로 target에 접근 할 수 있어야한다 (ProceedingJoinPoint)
-		try {
-			before();
-			jp.proceed();
-			afterReturning();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			afterThrowing();
-		}
-	}
+//	public void around(ProceedingJoinPoint jp){
+//		// target 실행 전에 실행되고 target을 직접 호출해야하므로 target에 접근 할 수 있어야한다 (ProceedingJoinPoint)
+//		try {
+//			before();
+//			jp.proceed();
+//			afterReturning();
+//		} catch (Throwable e) {
+//			// TODO Auto-generated catch block
+//			afterThrowing();
+//		}
+//	}
 }

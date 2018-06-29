@@ -1,30 +1,31 @@
 package model;
 
 public class Student {
-	private int snum;
-	private String sname;
-	private int sgrade;
-	
-	public int getSnum() {
-		return snum;
+	private int num;
+	private String name;
+	private int grade;
+	public int getNum() {
+		return num;
 	}
-	public void setSnum(int snum) {
-		this.snum = snum;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	public String getSname() {
-		return sname;
+	public String getName() {
+		return name;
 	}
-	public void setSname(String sname) {
-		this.sname = sname;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public int getSgrade() {
-		return sgrade;
+	public int getGrade() {
+		return grade;
 	}
-	public void setSgrade(int sgrade) {
-		this.sgrade = sgrade;
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	@Override
 	public String toString() {
-		return "Student [snum=" + snum + ", sname=" + sname + ", sgrade=" + sgrade + "]";
+		return "Student [num=" + num + ", name=" + name + ", grade=" + grade + "]";
 	}
+	
+	
 }

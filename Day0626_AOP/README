@@ -6,6 +6,14 @@
  기능구현 : 핵심기능을 구현
                    공통기능 구현
                  
-AOP 적용 : 핵심 기능 실행 할 때, 공통기능이 실행 될 수 있도록 설정
-  
-(1) Proxy 패턴
+AOP 적용 
+1. 핵심기능 구현클래스 할 인터페이스 작성
+2. 핵심기능이 구현될 클래스(Target) 작성,
+3. Target은 인터페이스를 구현해ㅑㅇ한다.
+4. advice 작성(Aspect)
+5. 스프링 설정파일 작성
+    - target을 bean으로 등록
+    - advice모듈 bean 등록
+    - aop 설정(joinpoint 설정 및 pointcut)
+    
+                
