@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "dao.IMemberDao">
+	<insert id="insertMember" parameterType="map">
+		INSERT INTO MEMBER VALUES(#{NAME}, #{ID}, #{PASSWORD}, #{EMAIL})
+	</insert>
+	<update id="updateMember" parameterType="map">
+		UPDATE MEMBER SET name = #{NAME}, id = #{ID}, password = #{PASSWORD}, email = #{EMAIL}
+						WHERE id = #{ID}
+	</update>
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM MEMBER WHERE id = #{ID}
+	</delete>
+	<select id="selectOne" parameterType="string" resultType="map">
+		SELECT * FROM MEMBER WHERE id = #{ID}
+	</select>
+	<select id="selectAll" resultType="map">
+		SELECT * FROM MEMBER
+	</select>
+</mapper>

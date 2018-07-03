@@ -1,0 +1,5 @@
+Spring Interceptor ( Servlet의 Filter 역할 )
+
+- Spring Container 내부에서 dispatcher로 요청이 가기전에 
+ 	미리 가로채서 요청을 먼저 확인, 검사 한 후 dispatcher로 보내준다.
+

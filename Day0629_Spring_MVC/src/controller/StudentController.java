@@ -29,8 +29,12 @@ public class StudentController {
 	@RequestMapping("/add")
 	public String insertStudent(Model model,@RequestParam Map<String, Object> param) {
 		// 파라미터?
-		service.insertStudent(param);
-		return "redirect:studentList";
+		int res = service.insertStudent(param);
+		String url = "redirect:studentList";
+		if(res <= 0) {
+			model.addAttribute("errorMsg", "가입실패");
+		}
+		return url;
 	}
 	
 	@RequestMapping("/selectStudentsByGrade")	
@@ -42,7 +46,7 @@ public class StudentController {
 	@RequestMapping("/updateStudent")
 	public String updateStudent(Model model, @RequestParam Map<String, Object> param) {
 		service.updateStudent(param);
-		return "redirect:studentList";
+		return "redirect:studentList";	// controller 내부로 요청을 보내는 방법
 	}
 	
 	
