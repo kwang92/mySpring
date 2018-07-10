@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IBoardDao">
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO SPRINGBOARD
+		VALUES(board_seq.nextval, #{title}, #{name},#{id}, #{pass}, #{email},
+		#{content}, 0, sysdate)
+	</insert>
+	<update id="updateBoard" parameterType="board">
+		UPDATE SPRINGBOARD SET
+		title = #{title}, content = #{content}
+		WHERE num = #{num}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM SPRINGBOARD
+		WHERE num = #{num}
+	</delete>
+	<select id="selectList" parameterType="map" resultType="board">
+		SELECT *
+		FROM (SELECT rownum as rnum, m.num, m.title, m.name, m.id, m.password, m.email, m.content, m.readCount, m.writeDate
+				from (SELECT num, title, name, id, password, email, content, readCount, writeDate
+						FROM SPRINGBOARD
+						ORDER BY num desc) m
+		)
+		WHERE rnum between #{FIRSTROW} and #{ENDROW}
+	</select>
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM
+		SPRINGBOARD
+	</select>
+	<select id="selectOne" parameterType="int" resultType="board">
+		SELECT *
+		FROM SPRINGBOARD WHERE num = #{num}
+	</select>
+	<select id="selectBoardsByOption" parameterType="string"
+		resultType="board">
+
+	</select>
+	<select id="selectAll" resultType="board">
+		SELECT * FROM SPRINGBOARD
+	</select>
+</mapper>

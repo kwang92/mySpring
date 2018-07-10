@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function makeApprov() {
+		var div = $("#approval");
+		$.ajax({
+			success : function(lines) {
+				for ( var line in lines) {
+					
+				}
+			}
+		});
+	};
+</script>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.under {
+	border: 3px solid black;
+}
+
+td {
+	border: 1px solid lightgray;
+}
+
+#header_wrap {
+	width: 780px;
+	height: 100px; border : 2px solid black;
+	margin: 0 auto;
+	border: 2px solid black
+}
+
+#content_wrap {
+	width: 780px;
+	margin: 0 auto;
+}
+
+#logo {
+	width: 200px;
+	height: 100%;
+	border: 1px solid black;
+	float: left;
+}
+
+h1 {
+	display: inline-block;
+	margin-top: 30px;
+}
+
+table {
+	width: 200px; display : inline-block;
+	float: right;
+	display: inline-block;
+}
+
+td {
+	border: 1px solid black;
+	width: 100px;
+}
+
+.hTitle {
+	background-color: lightgray;
+	text-align: center;
+}
+
+#approval {
+	text-align: right;
+	width: 780px;
+	height: 100px;
+}
+</style>
+</head>
+<body>
+	<div id="total_wrap" align="center">
+		<form action = "#">
+			<div id="header_wrap">
+				<img src="" id="logo" alt="로고 이미지">
+				<h1>기 안 서</h1>
+				<table>
+					<tr>
+						<td class="hTitle">문서번호</td>
+						<td class="hContent"></td>
+					</tr>
+					<tr>
+						<td class="hTitle">페이지번호</td>
+						<td class="hContent"></td>
+					</tr>
+					<tr>
+						<td class="hTitle">작성자</td>
+						<td class="hContent"></td>
+					</tr>
+					<tr>
+						<td class="hTitle">작성일자</td>
+						<td class="hContent"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="approval"></div>
+			<div id="content_wrap">
+				<hr class="under">
+				<span id="foot_content">상기와 같이 휴가를 신청하오니 재가 바랍니다.</span>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

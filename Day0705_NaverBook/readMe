@@ -1,0 +1,7 @@
+Naver OpenAPI 활용
+
+ * 책 검색 API
+ 1. 클라이언트에서 application으로 검색요청
+ 2. application은 클라이언트에서 전달 받은 검색어를 이용해서 naver로 검색 요청
+ 3. naver에서 json형태로 응답하면 응답결과 parsing 및 view 만들기
+ 4. 클라이언트에 응답

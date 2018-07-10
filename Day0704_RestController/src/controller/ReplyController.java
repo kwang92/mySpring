@@ -1,8 +1,11 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,8 @@ public class ReplyController {
 	private ReplyService service;
 	
 	
+	// ResponseEntity : 응답 할 때, 요청 처리코드와 데이터를 함께 전달
+	
 	@ResponseBody
 	@RequestMapping(value="", method= RequestMethod.POST)	// RequestMapping(value="") 를 하면 컨트롤러의 mapping 이름으로 처리된다.
 	public boolean register(Reply reply) {
@@ -36,12 +41,13 @@ public class ReplyController {
 	
 	// RequestMapping url에 포함 된  변수데이터 받아오기  == @PathVariable
 	@RequestMapping(value = "/update", method= RequestMethod.POST)
-	public boolean update(Reply reply){
+	public ResponseEntity<String> update(Reply reply){
+		ResponseEntity<String> entity = null;
 		boolean res = false;
 		if(service.updateReply(reply) > 0) {
-			res = true;
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		}
-		return res;
+		return entity;
 	}
 	
 	@RequestMapping(value="/{replyNum}", method= RequestMethod.DELETE)
@@ -56,7 +62,17 @@ public class ReplyController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/all/{boardNum}")
-	public List<Reply> list(@PathVariable("boardNum") int boardNum){
-		return service.selectByBoardNum(boardNum);
+	public ResponseEntity<List<Reply>> list(@PathVariable("boardNum") int boardNum){
+		ResponseEntity<List<Reply>> entity = null;
+		
+		try{
+			List<Reply> rList = service.selectByBoardNum(boardNum);
+			entity = new ResponseEntity<List<Reply>>(rList,HttpStatus.OK);
+		} catch(Exception e) {
+			entity = new ResponseEntity<List<Reply>>(HttpStatus.BAD_REQUEST);
+		}
+ 		return entity;//service.selectByBoardNum(boardNum);
 	}
+	
+
 }

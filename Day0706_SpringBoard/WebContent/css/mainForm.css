@@ -1,0 +1,20 @@
+@charset "UTF-8";
+ul{
+	list-style-type: none;
+}
+li{
+	display : inline-block;
+	margin-right : 10px;
+}
+a{
+	text-decoration: none;
+	color : black;
+}
+a:hover{
+	color : red;
+}
+#navi{
+	width : 780px;
+	margin : 0 auto;
+	text-align: right;
+}
