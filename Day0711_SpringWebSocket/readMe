@@ -1,0 +1,9 @@
+* Web Socket
+
+client에서 endpoint로 접근해서 연결 , spring WebSocketHandler 이용
+
+
+※ 요청이 들어오면 dispatcher servlet이 요청을 받아서 컨트롤러에 요청을 전달하는데
+  웹 소켓으로 들어오는 메시지이거나, 연결요청이면 중간에서 요청을 handler가 가로채서 처리
+
+1. WebSocket Handler 등록하기 (WebSocket Handler : 연결요청 받아서 연결 처리, 메시지 받아서 전달하는 역할)

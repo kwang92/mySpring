@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<context:component-scan
+		base-package="controller" />
+	<mvc:annotation-driven />
+	
+	<!-- 파일첨부 시, 파라미터로 넘어가는 mutlipart를 처리하기 위한 리졸버 등록 -->
+	<!-- <bean id="multipartResolver" -->
+	<!-- class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> -->
+	<!-- </bean> -->
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- <websocket:handlers> -->
+	<!-- <websocket:mapping handler="myHandler" path="/chat"/> -->
+	<!-- <websocket:handshake-interceptors> -->
+	<!-- <bean class = "org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> -->
+	<!-- </websocket:handshake-interceptors> -->
+	<!-- <websocket:sockjs></websocket:sockjs> sockjs 사용등록 -->
+	<!-- </websocket:handlers> -->
+
+	<websocket:message-broker application-destination-prefix="/client">
+		<websocket:stomp-endpoint path="/chat">
+			<websocket:sockjs></websocket:sockjs>
+		</websocket:stomp-endpoint>
+		<websocket:simple-broker prefix="/topic"/>
+	</websocket:message-broker>
+	<!-- <mvc:interceptors> -->
+	<!-- <mvc:interceptor> -->
+	<!-- <mvc:mapping path="/board/write" /> -->
+	<!-- <mvc:mapping path="/board/modifyForm" /> -->
+	<!-- 동작할 인터셉터 -->
+	<!-- <ref bean="loginCheckInterceptor" /> -->
+	<!-- </mvc:interceptor> -->
+	<!-- </mvc:interceptors> -->
+</beans>
+
+
+
+
+
+
